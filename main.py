@@ -10,4 +10,3 @@ method参数用于选则不同的梯度下降算法，可选naive, sgd, adagrad,
 """
 method='naive'
 function_regression.regression(method)
-

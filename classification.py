@@ -44,9 +44,9 @@ def sort():
     """----------------------数据集初始化----------------------"""
 
     # 数据分布与规模
-    u1 = [1, 0]
+    u1 = [-5, 0]
     s1 = [[1, 0], [0, 1]]
-    u2 = [0, 1]
+    u2 = [0, 5]
     s2 = [[1, 0], [0, 1]]
     n = 200
     train_rate = 0.8
@@ -91,8 +91,8 @@ def sort():
     time_lg_spend = time_lg_end - time_lg_start
 
     time_gd_start = time.time()
-    eta_gd = 0.05
-    max_iter_gd = 800
+    eta_gd = 0.01
+    max_iter_gd = 1500
     w_gd, iteration, loss_f, hist = gd.gradient_descent(x_train, y_train, eta_gd, max_iter_gd)
     time_gd_end = time.time()
     time_gd_spend = time_gd_end - time_gd_start
@@ -112,7 +112,8 @@ def sort():
     plt.figure("广义逆算法")
     str1 = "gen_inverse, x1~N(%s,%s), x2~N(%s,%s)" % (u1, s1, u2, s2)
     plt.title(str1)
-    z_pla = -(w_lg[0][0] / w_lg[0][1]) * x_co
+    #z_pla = -(w_lg[0][0] / w_lg[0][1]) * x_co
+    z_pla = -(w_lg[0][0] / w_lg[0][1]) * x_co - w_lg[0][2] / w_lg[0][1]
     plt.scatter(x1[:, 0], x1[:, 1], c='r')
     plt.scatter(x2[:, 0], x2[:, 1], c='b')
     plt.plot(x_co, z_pla, c='g')
