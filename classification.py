@@ -6,10 +6,11 @@ import gradient_descent as gd
 """----------------------结果统计----------------------"""
 
 
-def statistic(w, xin, yin, nin, xout, yout, nout):
+def statistic(w, xin, yin, xout, yout):
     wrong_cases_train = 0
     wrong_cases_test = 0
-
+    nin=len(xin)
+    nout=len(xout)
     for j in range(nin):
         if np.dot(w, xin[j]) * yin[j] <= 0:
             wrong_cases_train += 1
@@ -106,7 +107,7 @@ def sort():
 
     print("--------------广义逆结果统计--------------")
     print("w=", w_lg)
-    statistic(w_lg, x_train, y_train, n_train, x_test, y_test, n_test)
+    statistic(w_lg, x_train, y_train, x_test, y_test)
     print("算法运行时间=", time_lg_spend, "s")
 
     plt.figure("广义逆算法")
@@ -124,7 +125,7 @@ def sort():
     print("w=", w_gd)
     print("迭代次数=", iteration)
     print("损失函数=", loss_f[len(loss_f) - 1, 1])
-    statistic(w_gd, x_train, y_train, n_train, x_test, y_test, n_test)
+    statistic(w_gd, x_train, y_train, x_test, y_test)
     print("算法运行时间=", time_gd_spend, "s")
 
     plt.figure("梯度下降算法")
