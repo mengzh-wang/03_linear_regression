@@ -88,13 +88,13 @@ def preprocess(xin, yin):
     y, min_y, max_y = normalization(y)
     loss_t = []
     hist = []
-    d_loss_record = []
+    # d_loss_record = []
     [n_x, d_x] = x.shape
     w = np.zeros((1, d_x))
     w = w.T
     hist.append([w[0][0], w[1][0]])
     d_loss, d_loss_abs = deriv_loss(x, y, w)
-    d_loss_record.append([d_loss[0][0], d_loss[0][1]])
+    # d_loss_record.append([d_loss[0][0], d_loss[0][1]])
     loss = np.sum((np.dot(x, w) - y) ** 2) / n_x
     loss_t.append([0, loss])
     range = [min_x, max_x, min_y, max_y]
