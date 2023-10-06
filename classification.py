@@ -54,6 +54,7 @@ def sort():
     n_train = int(n * train_rate)
     n_test = n - n_train
     # 数据填充
+
     x1 = np.empty([n, 2])  # A
     x2 = np.empty([n, 2])  # B
     x_train = np.empty([n_train * 2, 2])  # 320
