@@ -56,14 +56,16 @@ def regression(method):
             w, iteration, loss_f, hist = gd.adam(x, y, eta, max_iter, alpha_adam, beta1, beta2, epsilon)
     time_end = time.time()
     time_spend = time_end - time_start
-
+    print('----------', method, '----------')
     print("w=", w)
     print("算法运行时间=", time_spend, "s")
 
     """----------------------绘图----------------------"""
     w = np.array(w)
     w = w.T
-    plt.figure("函数图像")
+
+    plt.figure("拟合结果")
+    plt.title(method)
     plt.plot(x[:, 0], y, c='b', label="y=x*cos(0.25Pi*x)")
     y_fit = np.dot(x, w)
     w_approx = np.around(w, 3)
@@ -72,17 +74,20 @@ def regression(method):
     plt.xlim(-5, 5)
     plt.ylim(-6, 6)
     plt.legend()
+    plt.savefig("../figs/curve_{}".format(method))
+    plt.close()
 
-    plt.figure("损失函数等高图")
+    plt.figure("梯度下降过程")
     hist = np.array(hist)
-    a = np.arange(min([-0.7, min(hist[:, 0])]), max(hist[:, 0]) + 0.1, 0.01)
-    b = np.arange(min(hist[:, 1]) - 0.1, max([0.9, max(hist[:, 1])]), 0.01)
+    a = np.arange(min([-0.7, min(hist[:, 0])-0.1]), max(hist[:, 0]) + 0.1, 0.01)
+    b = np.arange(min(hist[:, 1]) - 0.1, max([0.9, max(hist[:, 1])+0.1]), 0.01)
     A, B = np.meshgrid(a, b)
     plt.contourf(A, B, h(A, B), 20, cmap=plt.get_cmap('coolwarm'))
     plt.scatter(hist[:, 0], hist[:, 1], c='r')
     plt.plot(hist[:, 0], hist[:, 1], c='r', label=method)
     plt.legend()
+    plt.savefig("../figs/contour_{}".format(method))
+    plt.close()
+    # plt.show()
 
-    plt.show()
-
-    return 0
+    return hist, w, max_iter

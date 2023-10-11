@@ -53,7 +53,6 @@ def norm_inverse(w, data_range):
 def shuffle(xin, yin, batch_size):
     x_in = np.copy(xin)
     y_in = np.copy(yin)
-    print(len(x_in))
     x_out = []
     y_out = []
     for i in range(len(x_in) - 1, len(x_in) - 1 - batch_size, -1):

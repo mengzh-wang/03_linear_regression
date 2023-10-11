@@ -2,7 +2,8 @@ import numpy as np
 from matplotlib import pyplot as plt
 import time
 import gradient_descent as gd
-
+plt.rcParams['font.sans-serif'] = ['SimHei']
+plt.rcParams['axes.unicode_minus'] = False
 """----------------------结果统计----------------------"""
 
 
@@ -45,9 +46,9 @@ def sort():
     """----------------------数据集初始化----------------------"""
 
     # 数据分布与规模
-    u1 = [-5, 0]
+    u1 = [1, 0]
     s1 = [[1, 0], [0, 1]]
-    u2 = [0, 5]
+    u2 = [0, 1]
     s2 = [[1, 0], [0, 1]]
     n = 200
     train_rate = 0.8
@@ -93,8 +94,8 @@ def sort():
     time_lg_spend = time_lg_end - time_lg_start
 
     time_gd_start = time.time()
-    eta_gd = 0.01
-    max_iter_gd = 1500
+    eta_gd = 0.04
+    max_iter_gd = 1000
     w_gd, iteration, loss_f, hist = gd.gradient_descent(x_train, y_train, eta_gd, max_iter_gd)
     time_gd_end = time.time()
     time_gd_spend = time_gd_end - time_gd_start
@@ -112,7 +113,7 @@ def sort():
     print("算法运行时间=", time_lg_spend, "s")
 
     plt.figure("广义逆算法")
-    str1 = "gen_inverse, x1~N(%s,%s), x2~N(%s,%s)" % (u1, s1, u2, s2)
+    str1 = "广义逆, x1~N(%s,%s), x2~N(%s,%s)" % (u1, s1, u2, s2)
     plt.title(str1)
     #z_pla = -(w_lg[0][0] / w_lg[0][1]) * x_co
     z_pla = -(w_lg[0][0] / w_lg[0][1]) * x_co - w_lg[0][2] / w_lg[0][1]
@@ -130,7 +131,7 @@ def sort():
     print("算法运行时间=", time_gd_spend, "s")
 
     plt.figure("梯度下降算法")
-    str2 = "grandient_descent, x1~N(%s,%s), x2~N(%s,%s)" % (u1, s1, u2, s2)
+    str2 = "梯度下降, x1~N(%s,%s), x2~N(%s,%s)" % (u1, s1, u2, s2)
     plt.title(str2)
     z_gd = -(w_gd[0][0] / w_gd[0][1]) * x_co - w_gd[0][2] / w_gd[0][1]
     plt.scatter(x1[:, 0], x1[:, 1], c='r')
