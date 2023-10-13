@@ -126,6 +126,35 @@ def gradient_descent(xin, yin, eta, max_it):
     return w, it - 1, loss_t, hist
 
 
+def gradient_descent_epoch(xin, yin, eta, batch, epoch):
+    x, y, w, n_x, hist, loss_t, data_range = preprocess(xin, yin)
+    d_loss, d_loss_abs = deriv_loss(x, y, w)
+    terminate = False
+    it = 0
+    loss_min = loss_t[0]
+    for j in range(epoch):
+        if terminate:
+            break
+        xe, ye = x, y  # 不进行洗牌
+        # xe, ye = shuffle(x, y)        # 进行洗牌
+        for k in range(int(n_x / batch)):
+            xb = xe[k * batch:(k + 1) * batch]
+            yb = ye[k * batch:(k + 1) * batch]
+            d_loss, d_loss_abs = deriv_loss(xb, yb, w)
+            loss = np.sum((np.dot(x, w) - y) ** 2) / n_x
+            loss_t.append([it, loss])
+            if d_loss_abs <= 0.000000001:
+                terminate = True
+                break
+            it += 1
+            w = w - eta * d_loss.T
+            hist.append([w[0], w[1], w[2]])
+    w = w.T
+    w = w.tolist()
+    w = norm_inverse(w, data_range)
+
+    return w, it - 1, loss_t, hist
+
 """----------------随机梯度下降----------------"""
 
 

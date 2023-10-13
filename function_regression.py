@@ -74,7 +74,7 @@ def regression(method):
     plt.xlim(-5, 5)
     plt.ylim(-6, 6)
     plt.legend()
-    plt.savefig("../figs/curve_{}".format(method))
+    plt.savefig("../figs/iter_{}_{}_curve".format(max_iter, method))
     plt.close()
 
     plt.figure("梯度下降过程")
@@ -86,7 +86,7 @@ def regression(method):
     plt.scatter(hist[:, 0], hist[:, 1], c='r')
     plt.plot(hist[:, 0], hist[:, 1], c='r', label=method)
     plt.legend()
-    plt.savefig("../figs/contour_{}".format(method))
+    plt.savefig("../figs/iter_{}_{}_contour".format(max_iter, method))
     plt.close()
     # plt.show()
 

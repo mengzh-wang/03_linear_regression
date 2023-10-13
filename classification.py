@@ -10,8 +10,8 @@ plt.rcParams['axes.unicode_minus'] = False
 def statistic(w, xin, yin, xout, yout):
     wrong_cases_train = 0
     wrong_cases_test = 0
-    nin=len(xin)
-    nout=len(xout)
+    nin = len(xin)
+    nout = len(xout)
     for j in range(nin):
         if np.dot(w, xin[j]) * yin[j] <= 0:
             wrong_cases_train += 1
@@ -46,10 +46,10 @@ def sort():
     """----------------------数据集初始化----------------------"""
 
     # 数据分布与规模
-    u1 = [1, 0]
-    s1 = [[1, 0], [0, 1]]
-    u2 = [0, 1]
-    s2 = [[1, 0], [0, 1]]
+    u1 = [-5, 0]
+    s1 = [[2, 0], [0, 2]]
+    u2 = [0, 5]
+    s2 = [[2, 0], [0, 2]]
     n = 200
     train_rate = 0.8
     n_train = int(n * train_rate)
@@ -94,9 +94,10 @@ def sort():
     time_lg_spend = time_lg_end - time_lg_start
 
     time_gd_start = time.time()
-    eta_gd = 0.04
-    max_iter_gd = 1000
-    w_gd, iteration, loss_f, hist = gd.gradient_descent(x_train, y_train, eta_gd, max_iter_gd)
+    eta_gd = 0.5
+    max_iter_gd = 50
+    # w_gd, iteration, loss_f, hist = gd.gradient_descent(x_train, y_train, eta_gd, max_iter_gd)
+    w_gd, iteration, loss_f, hist = gd.gradient_descent_epoch(x_train, y_train, eta_gd, 320, 20)
     time_gd_end = time.time()
     time_gd_spend = time_gd_end - time_gd_start
     loss_f = np.array(loss_f)
