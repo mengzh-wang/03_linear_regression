@@ -276,10 +276,10 @@ def adam(xin, yin, eta, max_it, alpha, beta1, beta2, epsilon):
         it += 1
         if it == max_it + 1:
             break
-        m = (beta1 * m - (1 - beta1) * d_loss.T) / (1 - beta1 ** it)
+        m = (beta1 * m + (1 - beta1) * d_loss.T) / (1 - beta1 ** it)
         v = (beta2 * v + (1 - beta2) * d_loss.T ** 2 )/ (1 - beta2 ** it)
         w = w - alpha * m / (v ** 0.5 + epsilon)
-        w = w - eta * d_loss.T
+        # w = w - eta * d_loss.T
         hist.append([w[0][0], w[1][0]])
         d_loss, d_loss_abs = deriv_loss(x, y, w)
         # d_loss_record.append([d_loss[0][0],d_loss[0][1]])
